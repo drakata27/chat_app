@@ -3,11 +3,19 @@
 {% load static %}
 
 {% block content %}
-<h1>Welcome, Let's Chat!</h1>
-<div class="container-fluid" style="padding: 0;">
+<div class="container-fluid">
+    <h1>Welcome, Let's Chat!</h1>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3 mx-auto m-5">
+            <img src="{% static 'images/img-1.jpeg' %}" class="rounded-circle" style="width: 80%;">
+        </div>
+        <div class="col-md-3 mx-auto">
+            <img src="{% static 'images/img-2.avif' %}" class="rounded-circle" style="width: 80%;">
+        </div>
+        <div class="col-md-3 mx-auto m-5">
+            <img src="{% static 'images/img-3.avif' %}" class="rounded-circle" style="width: 80%;">
         </div>
     </div>
+
 </div>
 {% endblock %}
