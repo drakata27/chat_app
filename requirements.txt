@@ -1,4 +1,4 @@
-asgire==4.7.1
+asgiref==3.7.2
 attrs==23.1.0
 autobahn==23.6.2
 automat==22.10.0 
@@ -11,10 +11,10 @@ Django==4.2.5
 hyperlink==21.0.0 
 incremental==22.10.0 
 pyasn1==0.5.0 
-pyasn1==modules==0.3.0 
+pyasn1-modules==0.3.0 
 pycparser==2.21 
 pyopenssl==23.2.0 
 service-identity==23.1.0 
 twisted==23.8.0 
 txaio==23.1.1 
-zope==interface==6.0
+zope-interface==6.0

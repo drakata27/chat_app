@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# AUTH_USER_MODEL = 'account.User'
+AUTH_USER_MODEL = 'account.User'
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/chat-admin/'
