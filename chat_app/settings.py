@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # apps
     'account',
+    'chat',
     'core',
 ]
 
@@ -79,6 +80,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chat_app.wsgi.application'
 ASGI_APPLICATION = 'chat_app.asgi.application'
+
+# Defines how Channels should handle channels and routing for real-time events.
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND' : 'channels.layers.InMemoryChannelLayer',
+    }
+}
 
 
 # Database
