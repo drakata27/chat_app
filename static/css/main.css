@@ -24,10 +24,74 @@ h1 {
     border-radius: 4px;
 }
 .custom-btn:hover {
-    background-color: red !important;
+    background-color: green !important;
     color: white !important; 
     cursor: pointer;
 }
+
+/* Chat Bubble */
+#chat {
+    max-width: 300px;
+    margin-right: 20px;
+}
+.fixed-div {
+    background-color: transparent;
+    color: white;
+    padding: 20px;
+    top: 60%px;
+    right: 2rem;
+    bottom: 6rem;
+    padding: 2rem;
+    border-radius: 30px;
+}
+  
+#chat_open {
+    width: 50px;
+    display: flex;
+    align-items: center;
+} 
+
+.hidden {
+    display: none;
+}
+
+input{
+    background-color: rgb(234, 224, 224);
+    border-radius: 130px;
+    padding: 0.3rem;
+    border: none;
+}
+
+#chat_join {
+    color: #0d6efd !important; 
+    background-color: white !important; 
+    border: 1px solid black;
+}
+
+#chat_welcome {
+    background-color: #0d6efd;
+    padding: 2rem;
+    padding-left: 1rem;
+    border-radius: 30px;
+    border: 2px solid black
+}
+
+#chat_log {
+    background-color: rgb(234, 224, 224) !important;
+    height: 300px;
+    overflow: scroll;
+}
+#chat_room {
+    background-color: #0d6efd ; 
+    border: 1px solid black;
+    width: 300px;
+    margin-right: 30px;
+}
+
+#chat_message_input{
+    width: 17rem;
+}
+
 /* Small screens */
 @media(max-width: 991px) {
     .sidebar {
