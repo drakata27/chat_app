@@ -41,6 +41,65 @@ function getCookie(name) {
     return cookieValue
 }
 
+function sendMessage() {
+    chatSocket.send(JSON.stringify({
+        'type': 'message',
+        'message': chatInput.value,
+        'name': chatName
+    }))
+
+    chatInput.value = ''
+}
+
+function onChatMessage(data) {
+    console.log('onChatMessage', data);
+
+    if (data.type == 'chat_message') {
+        if (data.agent) {
+            chatLog.innerHTML += `
+            <div class="container mt-2 agent-bubble">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <div class="rounded-circle bg-secondary text-center pt-2" style="width: 50px; height: 50px;">
+                                ${data.initials}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 ml-auto">
+                            <div class="bg-primary p-3 rounded-4 >
+                                <p class="text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">${data.message}</p>
+                            </div>
+
+                            <p class="text-muted">${data.created_at}22 ago</p>
+                        </div>
+                    </div>
+                </div>
+            `
+        } else {
+            chatLog.innerHTML += `
+            <div class="container mt-2 client-bubble">
+                <div class="row">
+                    <div class="col-md-6 ml-auto">
+                        <div class="bg-primary p-3 rounded-4 d-flex justify-content-end">
+                            <p class="text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">${data.message}</p>
+                        </div>
+
+                        <p class="text-muted d-flex justify-content-end">${data.created_at} ago</p>
+                    </div>
+                    
+                    <div class="col-md-1">
+                        <div class="rounded-circle bg-secondary text-center pt-2" style="width: 50px; height: 50px;">
+                            ${data.initials}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `
+        }
+    }
+
+}
+
 async function JoinRoom() {
     chatName = chatUsername.value
 
@@ -62,8 +121,11 @@ async function JoinRoom() {
 
     chatSocket = new WebSocket(`ws://${window.location.host}/ws/${chatRoomId}/`)
 
+    // Get messages from the back end
     chatSocket.addEventListener('message', function(e) {
         console.log('Message');
+
+        onChatMessage(JSON.parse(e.data))
     })
 
     chatSocket.addEventListener('open', function(e) {
@@ -73,9 +135,11 @@ async function JoinRoom() {
     chatSocket.addEventListener('close', function(e) {
         console.log('WebSocket connection closed:', e.code, e.reason);
     })
-
-
 }
+
+
+
+
 
 // Event listeners
 chatOpen.addEventListener('click', function(e){
@@ -93,4 +157,27 @@ chatJoin.addEventListener('click', function(e){
     JoinRoom()
 })
 
+chatSubmit.addEventListener('click', function(e) {
+    e.preventDefault()
+    sendMessage()
+})
 
+{/* <div class="container mt-2 client-bubble">
+                    <div class="row">
+                        <div class="col-md-6 ml-auto">
+                            <div class="bg-primary p-3 rounded-4 d-flex justify-content-end">
+                                <p class="text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">${data.message}</p>
+                            </div>
+
+                            <p class="text-muted d-flex justify-content-end">${data.created_at}22 ago</p>
+                        </div>
+                        
+                        <div class="col-md-1">
+                            <div class="rounded-circle bg-secondary text-center pt-2" style="width: 50px; height: 50px;">
+                                ${data.initials}
+                            </div>
+                        </div>
+                    </div>
+                </div> */}
+
+                

@@ -32,7 +32,7 @@ h1 {
 /* Chat Bubble */
 #chat {
     max-width: 300px;
-    margin-right: 20px;
+    margin-right: 100px;
 }
 .fixed-div {
     background-color: transparent;
@@ -80,17 +80,38 @@ input{
     background-color: rgb(234, 224, 224) !important;
     height: 300px;
     overflow: scroll;
+    overflow-x: hidden;
 }
 #chat_room {
     background-color: #0d6efd ; 
     border: 1px solid black;
-    width: 300px;
-    margin-right: 30px;
+    width: 350px;
 }
 
 #chat_message_input{
     width: 17rem;
 }
+
+
+/* Client Message */
+.client-bubble {
+    margin-left: 80px;
+}
+.client-bubble p{
+    font-size: 14px;
+}
+
+/* Agent Message */
+.agent-bubble .col-md-6{
+    margin-left: 40px;
+}
+.agent-bubble .col-md-1{
+    margin-left: -20px;
+}
+.agent-bubble p{
+    font-size: 14px;
+}
+
 
 /* Small screens */
 @media(max-width: 991px) {
