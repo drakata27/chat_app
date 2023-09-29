@@ -1,2 +1,2 @@
-This is a real time chat application developed in the Django framework using Python, JavaScript, HTML, CSS and BootStrap.
+This is a real time chat application in active development using the Django framework, Python, JavaScript, HTML, CSS and BootStrap.
 
