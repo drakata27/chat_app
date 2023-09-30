@@ -28,6 +28,17 @@ h1 {
     color: white !important; 
     cursor: pointer;
 }
+.admin-btn {
+    color: blue !important;
+    background-color: orange !important; 
+    padding: 3px 10px;
+    border-radius: 4px;
+}
+.admin-btn:hover {
+    color: white !important;
+    background-color: red !important; 
+    cursor: pointer;
+}
 
 /* Chat Bubble */
 #chat {
@@ -113,6 +124,14 @@ input{
 }
 .agent-bubble p{
     font-size: 14px;
+}
+
+/* Chat admin */
+.chat-admin {
+    margin-left: 5rem;
+}
+.chat-admin a{
+    margin-top: 20px !important;
 }
 
 
