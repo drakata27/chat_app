@@ -38,4 +38,4 @@ class Room(models.Model):
         ordering = ('-created_at',)
 
     def __str__(self) -> str:
-        return f'{self.client - {self.room_id}}'
+        return f'self.client - {self.room_id}'

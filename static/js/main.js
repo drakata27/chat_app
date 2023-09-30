@@ -60,13 +60,13 @@ function onChatMessage(data) {
             <div class="container mt-2 agent-bubble">
                     <div class="row">
                         <div class="col-md-1">
-                            <div class="rounded-circle bg-secondary text-center pt-2" style="width: 50px; height: 50px;">
+                            <div class="rounded-circle bg-secondary text-center pt-2 initials" style="width: 50px; height: 50px;">
                                 ${data.initials}
                             </div>
                         </div>
 
                         <div class="col-md-6 ml-auto">
-                            <div class="bg-primary p-3 rounded-4 >
+                            <div class="p-3 rounded-4 >
                                 <p class="text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">${data.message}</p>
                             </div>
 
@@ -88,7 +88,7 @@ function onChatMessage(data) {
                     </div>
                     
                     <div class="col-md-1">
-                        <div class="rounded-circle bg-secondary text-center pt-2" style="width: 50px; height: 50px;">
+                        <div class="rounded-circle bg-secondary text-center pt-2 initials" style="width: 50px; height: 50px;">
                             ${data.initials}
                         </div>
                     </div>

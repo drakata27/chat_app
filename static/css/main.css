@@ -105,6 +105,9 @@ input{
 .agent-bubble .col-md-6{
     margin-left: 40px;
 }
+.agent-bubble .p-3{
+    background-color: rgb(180, 163, 163);
+}
 .agent-bubble .col-md-1{
     margin-left: -20px;
 }
@@ -118,5 +121,23 @@ input{
     .sidebar {
         background-color: rgba(255, 255, 255, 0.15);
         backdrop-filter: blur(10px)
+    }
+    #chat {
+        margin-right: 100px;
+    }
+}
+
+@media(max-width: 770px) { */
+    .client-bubble {
+        margin-right: 10rem;
+    }
+    .initials{
+        display: none;
+    }
+    .row {
+        width: 80% !important;
+    }
+    .agent-bubble {
+        margin-left: -50px !important;
     }
 }
