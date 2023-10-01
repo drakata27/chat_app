@@ -66,11 +66,11 @@ function onChatMessage(data) {
                         </div>
 
                         <div class="col-md-6 ml-auto">
-                            <div class="p-3 rounded-4 >
+                            <div class="p-3 rounded-4" >
                                 <p class="text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">${data.message}</p>
                             </div>
 
-                            <p class="text-muted">${data.created_at}22 ago</p>
+                            <p class="text-muted">${data.created_at} ago</p>
                         </div>
                     </div>
                 </div>

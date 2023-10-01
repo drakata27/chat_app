@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+
+{% load chatextras %}
+
+{% block content %}
+<div class="container ml-auto">
+    <h1 class="room-h1">Room: {{ room.room_id }}</h1>
+    
+    <p>Number of Messages: {{ room.messages.all|length }}</p>
+    
+    <p>
+        <b>Name: </b> {{room.client}} <br>
+        <b>Started: </b> {{room.created_at|timesince}} ago<br>
+        <b>Status: </b> {{room.get_status_display}} <br>
+        <b>Page: </b> {{room.url}} <br>
+        <b>Agent: </b> {% firstof room.agent.name 'None yet...'%} <br>
+    </p>
+
+    <div id="chat_log" class="mb-4 p-4 rounded-4" style="height: 500px;">
+        {% for message in room.messages.all %}
+        
+        <div class="container mt-2 agent-bubble">
+            <div class="row">
+                {% if not message.created_by %}
+                    <div class="col-md-1">
+                        <div class="rounded-circle bg-secondary text-center pt-2 initials" style="width: 50px; height: 50px;">
+                            {{ message.sent_by|initials }}
+                        </div>
+                    </div>
+                {% endif %}
+
+            <div class="col-md-6 ml-auto">
+                <div class="p-3 rounded-4" >
+                    <p class="text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">{{message.message_body}}</p>
+                </div>
+
+                <p class="text-muted">{{ message.created_at|timesince }} ago</p>
+            </div>
+            </div>
+        </div>
+
+        {% if message.created_by %}
+            <div class="col-md-1">
+                <div class="rounded-circle bg-secondary text-center pt-2 initials" style="width: 50px; height: 50px;">
+                    {{ message.sent_by|initials }}
+                </div>
+            </div>
+        {% endif %}
+        
+        {% endfor %}
+    </div>
+
+    {% if room.status == 'active' %}
+    <!-- CSRF Token -->
+    <form method="POST"> {% csrf_token %}
+        <input id="chat_message_input" type="text" name="message_body" class="p-2 m-2 rounded-4" placeholder="Type your message...">
+        <button id="chat_message_submit" class="custom-btn rounded-4 my-2 px-4 py-1 p-2 m-2 mb-4">Send</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

@@ -34,3 +34,15 @@ def admin(request):
     }
 
     return render(request, 'chat/admin.html', context=context)
+
+@login_required
+def room(request, room_id):
+    room = Room.objects.get(room_id=room_id)
+
+    if room.status == Room.WAITING:
+        room.status = Room.ACTIVE
+        room.agent = request.user
+        room.save()
+
+    context= {'room': room,}
+    return render(request, 'chat/room.html', context=context)

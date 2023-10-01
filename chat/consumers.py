@@ -75,7 +75,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     @sync_to_async
     def create_message(self, sent_by, message, agent):
         message = Message.objects.create(message_body=message, sent_by=sent_by)
-
+        print('Message: ',message)
         if agent:
             message.created_by = User.objects.get(pk=agent)
             message.save()

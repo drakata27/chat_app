@@ -10,23 +10,32 @@
         
         <div class="mt-5">
             {% for user in users %}
-            <div class="row rounded-end">
-                <div class="rounded-start col text-white  px-3 {% cycle 'bg-secondary' '' %}">
-                    <p>{{ user.name }}</p>
+            <div class="row rounded-">
+                <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
+                    <p class="py-3 d-flex justify-content-center">{{ user.name }}</p>
                 </div>
-                <div class="col text-white  px-3 {% cycle 'bg-secondary' '' %}">
-                    <p>{{ user.email }}</p>
+                <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
+                    <p class="py-3 d-flex justify-content-center">{{ user.email }}</p>
                 </div>
-                <div class="col text-white  px-3 {% cycle 'bg-secondary' '' %}">
-                    <p>{{ user.get_role_display }}</p>
+                <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
+                    <p class="py-3 d-flex justify-content-center">{{ user.get_role_display }}</p>
                 </div>
-                <div class="rounded-end  col text-white  px-3 {% cycle 'bg-secondary' '' %}">
-                    <p><a href="#" class="text-white">Edit</a></p>
+                <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
+                    <p class="text-white d-flex justify-content-end"><a href="#" class="text-white">Edit</a></p>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
 {% endif %}
+
+<hr class="m-5">
+
+<div class="container ml-auto chat-admin">
+    <div class="mt-5">
+        <h2 class="mb-4">Rooms</h2>
+        {% include 'chat/partials/room_list.html' %}
+    </div>
+</div>
 
 {% endblock %}
