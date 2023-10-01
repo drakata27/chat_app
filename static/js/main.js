@@ -4,8 +4,6 @@ let chatSocket = null
 let chatWindowURL = window.location.href
 let chatRoomId = Math.random().toString(36).slice(2, 12)
 
-console.log(chatRoomId);
-
 // Constants
 const chat = document.querySelector('#chat') 
 const chatOpen = document.querySelector('#chat_open') 
@@ -142,42 +140,27 @@ async function JoinRoom() {
 
 
 // Event listeners
-chatOpen.addEventListener('click', function(e){
-    e.preventDefault()
-    chatIcon.classList.add('hidden')
-    chatWelcome.classList.remove('hidden')
-})
+if (chatOpen) {
+    chatOpen.addEventListener('click', function(e){
+        e.preventDefault()
+        chatIcon.classList.add('hidden')
+        chatWelcome.classList.remove('hidden')
+    })
 
-chatJoin.addEventListener('click', function(e){
-    e.preventDefault()
+    chatJoin.addEventListener('click', function(e){
+        e.preventDefault()
+    
+        chatWelcome.classList.add('hidden')
+        chatRoom.classList.remove('hidden')
+    
+        JoinRoom()
+    })
+    
+    chatSubmit.addEventListener('click', function(e) {
+        e.preventDefault()
+        sendMessage()
+    })
+}
 
-    chatWelcome.classList.add('hidden')
-    chatRoom.classList.remove('hidden')
-
-    JoinRoom()
-})
-
-chatSubmit.addEventListener('click', function(e) {
-    e.preventDefault()
-    sendMessage()
-})
-
-{/* <div class="container mt-2 client-bubble">
-                    <div class="row">
-                        <div class="col-md-6 ml-auto">
-                            <div class="bg-primary p-3 rounded-4 d-flex justify-content-end">
-                                <p class="text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">${data.message}</p>
-                            </div>
-
-                            <p class="text-muted d-flex justify-content-end">${data.created_at}22 ago</p>
-                        </div>
-                        
-                        <div class="col-md-1">
-                            <div class="rounded-circle bg-secondary text-center pt-2" style="width: 50px; height: 50px;">
-                                ${data.initials}
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
 
                 
