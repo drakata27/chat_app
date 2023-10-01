@@ -11,7 +11,7 @@ const chatJoin = document.querySelector('#chat_join')
 const chatIcon = document.querySelector('#chat_icon') 
 const chatWelcome = document.querySelector('#chat_welcome') 
 
-const chatRoom = document.querySelector('#chat_room') 
+const chatRoomElement = document.querySelector('#chat_room') 
 
 const chatUsername = document.querySelector('#chat_name')
 const chatLog = document.querySelector('#chat_log')
@@ -135,10 +135,6 @@ async function JoinRoom() {
     })
 }
 
-
-
-
-
 // Event listeners
 if (chatOpen) {
     chatOpen.addEventListener('click', function(e){
@@ -151,7 +147,7 @@ if (chatOpen) {
         e.preventDefault()
     
         chatWelcome.classList.add('hidden')
-        chatRoom.classList.remove('hidden')
+        chatRoomElement.classList.remove('hidden')
     
         JoinRoom()
     })

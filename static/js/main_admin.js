@@ -1,3 +1,94 @@
-console.log('main admin');
-console.log('main admin');
-console.log('main admin');
+// Variables
+const chatRoom = document.querySelector('#room_room_id').textContent.replaceAll('"', '')
+const userName = document.querySelector('#user_name').textContent.replaceAll('"', '')
+const agent = document.querySelector('#user_id').textContent.replaceAll('"', '')
+let chatSocket = null
+
+// Elements
+const chatLog = document.querySelector('#chat_log')
+const chatInput = document.querySelector('#chat_message_input')
+const chatSubmit = document.querySelector('#chat_message_submit')
+
+// Functions
+function sendMessage() {
+    chatSocket.send(JSON.stringify({
+        'type': 'message',
+        'message': chatInput.value,
+        'name': userName,
+        'agent': agent,
+    }))
+
+    chatInput.value = ''
+}
+
+function onChatMessage(data) {
+    console.log('onChatMessage', data);
+
+    if (data.type == 'chat_message') {
+        if (!data.agent) {
+            chatLog.innerHTML += `
+            <div class="container mt-2 agent-bubble">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <div class="rounded-circle bg-secondary text-center pt-2 initials" style="width: 50px; height: 50px;">
+                                ${data.initials}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 ml-auto">
+                            <div class="p-3 rounded-4" >
+                                <p class="text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">${data.message}</p>
+                            </div>
+
+                            <p class="text-muted">${data.created_at} ago</p>
+                        </div>
+                    </div>
+                </div>
+            `
+        } else {
+            chatLog.innerHTML += `
+            <div class="container mt-2 client-bubble">
+                <div class="row">
+                    <div class="col-md-6 ml-auto">
+                        <div class="bg-primary p-3 rounded-4 d-flex justify-content-end">
+                            <p class="text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">${data.message}</p>
+                        </div>
+
+                        <p class="text-muted d-flex justify-content-end">${data.created_at} ago</p>
+                    </div>
+                    
+                    <div class="col-md-1">
+                        <div class="rounded-circle bg-secondary text-center pt-2 initials" style="width: 50px; height: 50px;">
+                            ${data.initials}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `
+        }
+    }
+
+}
+
+// Websocket
+chatSocket = new WebSocket(`ws://${window.location.host}/ws/${chatRoom}/`)
+
+chatSocket.addEventListener('message', function(e) {
+    console.log('Message');
+    
+    onChatMessage(JSON.parse(e.data))
+})
+
+chatSocket.addEventListener('open', function(e) {
+    console.log('WebSocket connection opened');
+})
+
+chatSocket.addEventListener('close', function(e) {
+    console.log('WebSocket connection closed:', e.code, e.reason);
+})
+
+// Event Listeners
+chatSubmit.addEventListener('click', function(e) {
+    e.preventDefault()
+    sendMessage()
+})
