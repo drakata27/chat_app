@@ -10,6 +10,10 @@ const chatInput = document.querySelector('#chat_message_input')
 const chatSubmit = document.querySelector('#chat_message_submit')
 
 // Functions
+function scrollToBottom() {
+    chatLog.scrollTop = chatLog.scrollHeight
+}
+
 function sendMessage() {
     chatSocket.send(JSON.stringify({
         'type': 'message',
@@ -67,7 +71,7 @@ function onChatMessage(data) {
             `
         }
     }
-
+    scrollToBottom()
 }
 
 // Websocket
@@ -81,6 +85,7 @@ chatSocket.addEventListener('message', function(e) {
 
 chatSocket.addEventListener('open', function(e) {
     console.log('WebSocket connection opened');
+    scrollToBottom()
 })
 
 chatSocket.addEventListener('close', function(e) {
@@ -91,4 +96,10 @@ chatSocket.addEventListener('close', function(e) {
 chatSubmit.addEventListener('click', function(e) {
     e.preventDefault()
     sendMessage()
+})
+
+chatInput.addEventListener('keyup', function(e){
+    if (e.keyCode == 13) {
+        sendMessage()
+    }
 })

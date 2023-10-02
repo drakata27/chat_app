@@ -19,6 +19,10 @@ const chatInput = document.querySelector('#chat_message_input')
 const chatSubmit = document.querySelector('#chat_message_submit')
 
 // Functions
+function scrollToBottom() {
+    chatLog.scrollTop = chatLog.scrollHeight
+}
+
 function getCookie(name) {
     var cookieValue = null
 
@@ -96,6 +100,8 @@ function onChatMessage(data) {
         }
     }
 
+    scrollToBottom()
+
 }
 
 async function JoinRoom() {
@@ -128,6 +134,7 @@ async function JoinRoom() {
 
     chatSocket.addEventListener('open', function(e) {
         console.log('WebSocket connection opened');
+        scrollToBottom()
     })
 
     chatSocket.addEventListener('close', function(e) {
@@ -158,5 +165,10 @@ if (chatOpen) {
     })
 }
 
+// chatInput.addEventListener('keyup', function(e){
+//     if (e.keyCode == 13) {
+//         sendMessage()
+//     }
+// })
 
                 
