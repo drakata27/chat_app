@@ -47,7 +47,7 @@
                 {% if not request.user.is_authenticated %}
                   <a href="{% url 'account:login' %}" class="text-white text-decoration-none px-3 py-1 bg-primary rounded-4 custom-btn">Login</a>
                 {% else %}
-                <a href="#signout" class="text-white text-decoration-none px-3 py-1 bg-primary rounded-4 custom-btn">Sign Out</a>
+                <a href="{% url 'account:logout' %}" class="text-white text-decoration-none px-3 py-1 bg-primary rounded-4 custom-btn">Sign Out</a>
                 <a href="{% url 'chat:admin' %}" class="text-white text-decoration-none px-3 py-1 rounded-4 admin-btn">Admin</a>
                 {% endif %}
               </div>
