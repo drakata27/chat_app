@@ -5,6 +5,9 @@
     .container h1{
         margin-top: 150px;
     }
+    .col a{
+        color: white;
+    }
 </style>
 <div class="container">
     <h1>Chat Admin</h1>
@@ -18,7 +21,7 @@
                 {% for user in users %}
                 <div class="row rounded-">
                     <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
-                        <p class="py-3 d-flex justify-content-center">{{ user.name }}</p>
+                        <a href="{% url 'chat:user_detail' user.pk%}"><p class="py-3 d-flex justify-content-center">{{ user.name }}</p></a>
                     </div>
                     <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
                         <p class="py-3 d-flex justify-content-center">{{ user.email }}</p>
@@ -26,9 +29,11 @@
                     <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
                         <p class="py-3 d-flex justify-content-center">{{ user.get_role_display }}</p>
                     </div>
-                    <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
-                        <p class="text-white d-flex justify-content-end"><a href="#" class="text-white">Edit</a></p>
-                    </div>
+                    {% if perms.user.add_user %}
+                        <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
+                            <p class="text-white d-flex justify-content-end"><a href="{% url 'chat:edit_user' user.pk %}" class="text-white">Edit</a></p>
+                        </div>
+                    {% endif %}
                 </div>
                 {% endfor %}
             </div>

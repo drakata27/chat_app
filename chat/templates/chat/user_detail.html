@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <h1>{{user.name}}</h1>
+
+    <div class="container ml-auto chat-admin">
+        <div class="mt-5">
+            <h2 class="mb-4">Rooms</h2>
+            {% include 'chat/partials/room_list.html' %}
+        </div>
+    </div>
+{% endblock %}

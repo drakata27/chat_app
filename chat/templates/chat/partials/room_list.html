@@ -12,6 +12,7 @@
                 <b>Agent: </b> {% firstof room.agent.name 'None yet...'%} <br>
             </p>
 
-            <a href="{% url 'chat:room' room.room_id %}" class="mt-4 rounded-2 bg-danger p-2 text-white">Join Room</a>
+            <a href="{% url 'chat:room' room.room_id %}" class="mt-4 rounded-2 bg-primary p-2 text-white">Join</a>
+            <a href="{% url 'chat:delete_room' room.room_id %}" class="mt-4 rounded-2 bg-danger p-2 text-white">Delete</a>
         </div>
         {% endfor %}
