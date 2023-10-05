@@ -1,40 +1,47 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-<h1>Chat Admin</h1>
-
-{% if perms.user.add_user %}
-    <div class="container ml-auto chat-admin">
-        <h2 class="mb-4">Users</h2>
-        <a href="#" class="p-2 rounded-4 bg-primary text-white" style="margin-top: 200px !important;">Add User</a>
-        
-        <div class="mt-5">
-            {% for user in users %}
-            <div class="row rounded-">
-                <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
-                    <p class="py-3 d-flex justify-content-center">{{ user.name }}</p>
+<style>
+    .container h1{
+        margin-top: 150px;
+    }
+</style>
+<div class="container">
+    <h1>Chat Admin</h1>
+    
+    {% if perms.user.add_user %}
+        <div class="container ml-auto chat-admin">
+            <h2 class="mb-4">Users</h2>
+            <a href="{% url 'chat:add_user' %}" class="p-2 rounded-4 bg-primary text-white" style="margin-top: 200px !important;">Add User</a>
+            
+            <div class="mt-5">
+                {% for user in users %}
+                <div class="row rounded-">
+                    <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
+                        <p class="py-3 d-flex justify-content-center">{{ user.name }}</p>
+                    </div>
+                    <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
+                        <p class="py-3 d-flex justify-content-center">{{ user.email }}</p>
+                    </div>
+                    <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
+                        <p class="py-3 d-flex justify-content-center">{{ user.get_role_display }}</p>
+                    </div>
+                    <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
+                        <p class="text-white d-flex justify-content-end"><a href="#" class="text-white">Edit</a></p>
+                    </div>
                 </div>
-                <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
-                    <p class="py-3 d-flex justify-content-center">{{ user.email }}</p>
-                </div>
-                <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
-                    <p class="py-3 d-flex justify-content-center">{{ user.get_role_display }}</p>
-                </div>
-                <div class="col text-white  px-3 {% cycle 'bg-secondary' 'bg-primary' %}">
-                    <p class="text-white d-flex justify-content-end"><a href="#" class="text-white">Edit</a></p>
-                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
-    </div>
-{% endif %}
-
-<hr class="m-5">
-
-<div class="container ml-auto chat-admin">
-    <div class="mt-5">
-        <h2 class="mb-4">Rooms</h2>
-        {% include 'chat/partials/room_list.html' %}
+    {% endif %}
+    
+    <hr class="m-5">
+    
+    <div class="container ml-auto chat-admin">
+        <div class="mt-5">
+            <h2 class="mb-4">Rooms</h2>
+            {% include 'chat/partials/room_list.html' %}
+        </div>
     </div>
 </div>
 

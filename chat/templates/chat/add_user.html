@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<style>
+    body {
+        overflow: hidden;
+    }
+    input {
+        width: 160%;
+    }
+    label {
+        align-items: center;
+    }
+    button {
+        margin-left: 60%;
+    }
+    .container-fluid {
+        width: 90%;
+    }
+    footer {
+        height: 220px;
+    }
+</style>
+
+<h1 class="room-h1">Add User</h1>
+<div class="container-fluid m-5 d-flex justify-content-center">
+
+    <div class="col-md-2 d-flex justify-content-center">
+        <form method="POST" action="." class="p-6" style="width: 120%; margin-bottom: 100%;">
+            {% csrf_token %}
+    
+            {{ form.as_p }}
+            
+            <div class="container d-flex justify-content-center">
+                <button class="p-2 rounded-4 bg-primary text-white" style="width: 100px;">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
