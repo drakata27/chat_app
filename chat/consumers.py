@@ -26,8 +26,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         # Inform user
         if self.user.is_staff:
-            # await self.channel_layer.group_send(self.room_group_name, self.channel_name)
-            pass
+            await self.channel_layer.group_send(
+                self.room_group_name, 
+                {
+                    'type':'users_update',
+                }    
+            )
 
 
     async def disconnect(self, close_code):
@@ -67,7 +71,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
             })
 
     async def chat_message(self, event):
-        print('event', event)
         # Send message to the websocket (front end)
         await self.send(text_data=json.dumps({
             'type': event['type'],
@@ -76,6 +79,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'agent': event['agent'],
             'initials': event['initials'],
             'created_at': event['created_at'],
+        }))
+
+    async def users_update(self, event):
+        # Send information (Usef joined the chat) to the websocket (front end)
+        # 
+        await self.send(text_data=json.dumps({
+            'type': 'users_update',
         }))
 
     @sync_to_async

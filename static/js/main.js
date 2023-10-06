@@ -98,6 +98,8 @@ function onChatMessage(data) {
             </div>
             `
         }
+    } else if (data.type == 'users_update') {
+        chatLog.innerHTML += '<p class="text-sm text-black overflow-hidden" style="white-space: normal; word-wrap: break-word;">Agent has joined the chat!</p>'
     }
 
     scrollToBottom()
