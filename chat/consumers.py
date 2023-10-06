@@ -50,13 +50,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         name = text_data_json['name']
         agent = text_data_json.get('agent', '')
 
-        # print
-        print('text data json', text_data_json)
-        print('type', type)
-        print('message', message)
-        print('name', name)
-        print('agent', agent)
-
         if type == 'message':
             new_message = await self.create_message(name, message, agent)
 
@@ -69,6 +62,18 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'initials': initials(name),
                 'created_at': timesince(new_message.created_at),
             })
+        elif type == 'update':
+            # send update to the room
+            await self.channel_layer.group_send(
+                self.room_group_name, {
+                    'type': 'writing_active',
+                    'message': message,
+                    'name': name,
+                    'agent': agent,
+                    'initials': initials(name),
+                }
+            )
+
 
     async def chat_message(self, event):
         # Send message to the websocket (front end)
@@ -80,6 +85,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'initials': event['initials'],
             'created_at': event['created_at'],
         }))
+    
+    async def writing_active(self, event):
+        #  Send writing is active to rom
+        await self.send(text_data=json.dumps({
+            'type': event['type'],
+            'message': event['message'],
+            'name': event['name'],
+            'agent': event['agent'],
+            'initials': event['initials'],
+        }))
+        
 
     async def users_update(self, event):
         # Send information (Usef joined the chat) to the websocket (front end)

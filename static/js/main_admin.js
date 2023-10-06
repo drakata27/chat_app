@@ -29,6 +29,12 @@ function onChatMessage(data) {
     console.log('onChatMessage', data);
 
     if (data.type == 'chat_message') {
+        let tmpInfo = document.querySelector('.tmp-info')
+
+            if (tmpInfo) {
+                tmpInfo.remove()
+            }
+
         if (!data.agent) {
             chatLog.innerHTML += `
             <div class="container mt-2 agent-bubble">
@@ -69,6 +75,33 @@ function onChatMessage(data) {
                 </div>
             </div>
             `
+        } 
+    } else if (data.type == 'writing_active') {
+        if (!data.agent) {
+            let tmpInfo = document.querySelector('.tmp-info')
+
+            if (tmpInfo) {
+                tmpInfo.remove()
+            }
+
+            chatLog.innerHTML += `
+            <div class="container mt-2 agent-bubble">
+                    <div class="tmp-info row">
+                        <div class="col-md-1">
+                            <div class="rounded-circle bg-secondary text-center pt-2 initials" style="width: 50px; height: 50px;">
+                                ${data.initials}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 ml-auto">
+                            <div class="p-3 rounded-4" >
+                                <p class="text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">${data.name} is typing...</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            `
         }
     }
     scrollToBottom()
@@ -102,4 +135,13 @@ chatInput.addEventListener('keyup', function(e){
     if (e.keyCode == 13) {
         sendMessage()
     }
+})
+
+chatInput.addEventListener('focus', function(e){
+    chatSocket.send(JSON.stringify({
+        'type': 'update',
+        'message': 'writing_active',
+        'name': userName,
+        'agent': agent,
+    }))
 })

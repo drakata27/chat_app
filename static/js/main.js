@@ -58,6 +58,12 @@ function onChatMessage(data) {
 
     if (data.type == 'chat_message') {
         if (data.agent) {
+            let tmpInfo = document.querySelector('.tmp-info')
+
+            if (tmpInfo) {
+                tmpInfo.remove()
+            }
+
             chatLog.innerHTML += `
             <div class="container mt-2 agent-bubble">
                     <div class="row">
@@ -100,6 +106,30 @@ function onChatMessage(data) {
         }
     } else if (data.type == 'users_update') {
         chatLog.innerHTML += '<p class="text-sm text-black overflow-hidden" style="white-space: normal; word-wrap: break-word;">Agent has joined the chat!</p>'
+    } else if (data.type == 'writing_active') {
+        if (data.agent) {
+            let tmpInfo = document.querySelector('.tmp-info')
+
+            if (tmpInfo) {
+                tmpInfo.remove()
+            }
+
+            chatLog.innerHTML += `<div class="container mt-2 agent-bubble">
+            <div class="tmp-info row">
+                <div class="col-md-1">
+                    <div class="rounded-circle bg-secondary text-center pt-2 initials" style="width: 50px; height: 50px;">
+                        ${data.initials}
+                    </div>
+                </div>
+
+                <div class="col-md-6 ml-auto">
+                    <div class="p-3 rounded-4" >
+                        <p class="text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">${data.name} is typing...</p>
+                    </div>
+                </div>
+            </div>
+        </div>`
+        }
     }
 
     scrollToBottom()
@@ -173,4 +203,11 @@ if (chatOpen) {
 //     }
 // })
 
+chatInput.addEventListener('focus', function(e){
+    chatSocket.send(JSON.stringify({
+        'type': 'update',
+        'message': 'writing_active',
+        'name': chatName,
+    }))
+})
                 
