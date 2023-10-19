@@ -40,14 +40,14 @@ function onChatMessage(data) {
             <div class="container mt-2 agent-bubble">
                     <div class="row">
                         <div class="col-md-1">
-                            <div class="rounded-circle bg-secondary text-center pt-2 initials" style="width: 50px; height: 50px;">
+                            <div class="text-white rounded-circle bg-secondary text-center pt-2 initials" style="width: 50px; height: 50px;">
                                 ${data.initials}
                             </div>
                         </div>
 
                         <div class="col-md-6 ml-auto">
                             <div class="p-3 rounded-4" >
-                                <p class="text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">${data.message}</p>
+                                <p class="text-white text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">${data.message}</p>
                             </div>
 
                             <p class="text-muted">${data.created_at} ago</p>
@@ -61,14 +61,14 @@ function onChatMessage(data) {
                 <div class="row">
                     <div class="col-md-6 ml-auto">
                         <div class="bg-primary p-3 rounded-4 d-flex justify-content-end">
-                            <p class="text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">${data.message}</p>
+                            <p class="text-white text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">${data.message}</p>
                         </div>
 
                         <p class="text-muted d-flex justify-content-end">${data.created_at} ago</p>
                     </div>
                     
                     <div class="col-md-1">
-                        <div class="rounded-circle bg-secondary text-center pt-2 initials" style="width: 50px; height: 50px;">
+                        <div class="text-white rounded-circle bg-secondary text-center pt-2 initials" style="width: 50px; height: 50px;">
                             ${data.initials}
                         </div>
                     </div>
@@ -88,14 +88,14 @@ function onChatMessage(data) {
             <div class="container mt-2 agent-bubble">
                     <div class="tmp-info row">
                         <div class="col-md-1">
-                            <div class="rounded-circle bg-secondary text-center pt-2 initials" style="width: 50px; height: 50px;">
+                            <div class="text-white rounded-circle bg-secondary text-center pt-2 initials" style="width: 50px; height: 50px;">
                                 ${data.initials}
                             </div>
                         </div>
 
                         <div class="col-md-6 ml-auto">
                             <div class="p-3 rounded-4" >
-                                <p class="text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">${data.name} is typing...</p>
+                                <p class="text-white text-sm overflow-hidden" style="white-space: normal; word-wrap: break-word;">${data.name} is typing...</p>
                             </div>
 
                         </div>

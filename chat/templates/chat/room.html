@@ -19,13 +19,13 @@
     <div id="chat_log" class="mb-4 p-4 rounded-4" style="height: 500px;">
         {% for message in room.messages.all %}
         
-        <div class="container mt-2 {% if message.created_by %}agent-bubble text-white{% else %}client-bubble{% endif %}">
+        <div class="container mt-2 {% if message.created_by %}agent-bubble text-white {% else %}client-bubble{% endif %}">
+            
             <div class="row">
-                
-                {% if not message.created_by %}
+                {% if message.created_by %}
                     <div class="col-md-1">
                         <div class="text-white rounded-circle bg-secondary text-center pt-2 initials" style="width: 50px; height: 50px;">
-                            {{ message.sent_by|initials }}
+                            <p class="text-white">{{ message.sent_by|initials }}</p>
                         </div>
                     </div>
                 {% endif %}
@@ -38,6 +38,7 @@
                     <p class="text-muted">{{ message.created_at|timesince }} ago</p>
                 </div>
             </div>
+
         </div>
 
         {% if message.created_by %}
